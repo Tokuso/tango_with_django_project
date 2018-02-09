@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from rango.models import Page, Category
 
 NAME_TITLE = 128
@@ -35,3 +36,15 @@ class PageForm(forms.ModelForm):
             cleaned_data['url'] = url
 
             return cleaned_data
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = UserFormfields = ('username', 'email', 'password')
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        exclude = ('user',)
